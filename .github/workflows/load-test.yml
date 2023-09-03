@@ -19,4 +19,4 @@ jobs:
     - name: Run local k6 test
       uses: grafana/k6-action@v0.2.0
       with:
-        filename: ./tests/npm/npm-cluster-test.js
+        filename: ./tests/npm/npm-cluster-tests.js

@@ -3,15 +3,19 @@ name: Mirmata Load Tests
 on:
   workflow_dispatch:
 
+env:
+  NIRMATA_URL: nirmata.io
+  NIRMATA_ADMIN_API_TOKEN: FcRJdUCEO4VPy4kZb9DWF5QbnuDd0XSXESgPvxF9XX5LdJ3r/T6+45nxKfTDgeEHiGIqCa7SuywRsE8DKsrhRA==
+  NIRMATA_PLATFORM_API_TOKEN: xxxxx
+  NIRMATA_DEVOPS_API_TOKEN: xxxx
+
 jobs:
   k6_load_test:
     name: k6 Load Test
     runs-on: ubuntu-latest
-
-  steps:
+    steps:
     - name: Checkout
       uses: actions/checkout@v1
-
     - name: Run local k6 test
       uses: grafana/k6-action@v0.2.0
       with:

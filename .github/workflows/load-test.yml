@@ -8,6 +8,8 @@ env:
   NIRMATA_ADMIN_API_TOKEN: ${{ secrets.ADMIN_TOKEN }}
   NIRMATA_PLATFORM_API_TOKEN: xxxxx
   NIRMATA_DEVOPS_API_TOKEN: xxxx
+  NIRMATA_K6_VUS: 10
+  NIRMATA_K6_DURATION: 1m
 
 jobs:
   k6_load_test:
@@ -20,4 +22,5 @@ jobs:
       uses: grafana/k6-action@v0.2.0
       with:
         filename: ./tests/npm/policy-reports-test.js
+        flags: --vus ${{ NIRMATA_K6_VUS }} --duration ${{ NIRMATA_K6_DURATION }}
 

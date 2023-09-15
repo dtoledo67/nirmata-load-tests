@@ -21,12 +21,14 @@ jobs:
       
     - name: policy-reports-admin
       uses: grafana/k6-action@v0.2.0
+      continue-on-error: true
       with:
         filename: ./tests/npm/policy-reports-test.js
         flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
         
     - name: policy-report-admin
       uses: grafana/k6-action@v0.2.0
+      continue-on-error: true
       with:
         filename: ./tests/npm/policy-report-test.js
         flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION

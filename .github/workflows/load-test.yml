@@ -9,18 +9,25 @@ env:
   NIRMATA_PLATFORM_API_TOKEN: xxxxx
   NIRMATA_DEVOPS_API_TOKEN: xxxx
   NIRMATA_K6_VUS: 10
-  NIRMATA_K6_DURATION: 1m
+  NIRMATA_K6_DURATION: 15s
 
 jobs:
   k6_load_test:
-    name: k6 Load Test
+    name: Nirmata K6 Load Tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Run local k6 test
+      
+    - name: policy-reports-admin
       uses: grafana/k6-action@v0.2.0
       with:
         filename: ./tests/npm/policy-reports-test.js
+        flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
+        
+    - name: policy-report-admin
+      uses: grafana/k6-action@v0.2.0
+      with:
+        filename: ./tests/npm/policy-report-test.js
         flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
 

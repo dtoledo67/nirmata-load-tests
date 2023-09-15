@@ -22,5 +22,5 @@ jobs:
       uses: grafana/k6-action@v0.2.0
       with:
         filename: ./tests/npm/policy-reports-test.js
-        flags: --vus ${{ NIRMATA_K6_VUS }} --duration ${{ NIRMATA_K6_DURATION }}
+        flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
 

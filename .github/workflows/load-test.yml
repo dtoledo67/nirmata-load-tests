@@ -9,6 +9,8 @@ env:
   NIRMATA_NPM_DEVOPS_TOKEN: ${{ secrets.NPM_DEVOPS_TOKEN }}
   NIRMATA_NDP_ADMIN_TOKEN: ${{ secrets.NDP_ADMIN_TOKEN }}
   NIRMATA_NDP_DEVOPS_TOKEN: ${{ secrets.NDP_DEVOPS_TOKEN }}
+
+  K6_ACTION: grafana/k6-action@v0.2.0
   K6_VUS: 10
   K6_DURATION: 15s
 
@@ -28,13 +30,13 @@ jobs:
       uses: actions/checkout@v1
       
     - name: policy-reports-admin
-      uses: grafana/k6-action@v0.2.0
+      uses: ${{env.K6_ACTION}}
       with:
         filename: ./tests/npm/policy-reports-test.js
         flags: $K6_NPM_ADMIN_FLAGS
         
     - name: policy-report-admin
-      uses: grafana/k6-action@v0.2.0
+      uses: ${{env.K6_ACTION}}
       with:
         filename: ./tests/npm/policy-report-test.js
         flags: $K6_NPM_ADMIN_FLAGS

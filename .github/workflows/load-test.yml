@@ -9,8 +9,9 @@ env:
   NIRMATA_NPM_DEVOPS_TOKEN: ${{ secrets.NPM_DEVOPS_TOKEN }}
   NIRMATA_NDP_ADMIN_TOKEN: ${{ secrets.NDP_ADMIN_TOKEN }}
   NIRMATA_NDP_DEVOPS_TOKEN: ${{ secrets.NDP_DEVOPS_TOKEN }}
-  NIRMATA_K6_VUS: 10
-  NIRMATA_K6_DURATION: 15s
+  K6_VUS: 10
+  K6_DURATION: 15s
+  K6_NPM_ADMIN_FLAGS: --env NIRMATA_API_TOKEN=NIRMATA_NPM_ADMIN_TOKEN $--vus $K6_VUS --duration $K6_DURATION
 
 jobs:
   k6_load_test:
@@ -25,12 +26,12 @@ jobs:
       continue-on-error: true
       with:
         filename: ./tests/npm/policy-reports-test.js
-        flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
+        flags: $K6_NPM_ADMIN_FLAGS
         
     - name: policy-report-admin
       uses: grafana/k6-action@v0.2.0
       continue-on-error: true
       with:
         filename: ./tests/npm/policy-report-test.js
-        flags: --vus $NIRMATA_K6_VUS --duration $NIRMATA_K6_DURATION
+        flags: $K6_NPM_ADMIN_FLAGS
 

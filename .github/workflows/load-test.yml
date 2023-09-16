@@ -26,7 +26,7 @@ jobs:
       continue-on-error: true
       with:
         filename: ./tests/npm/policy-reports-test.js
-        flags: $K6_NPM_ADMIN_FLAGS
+        flags: ${{ K6_NPM_ADMIN_FLAGS }}
         
     - name: policy-report-admin
       uses: grafana/k6-action@v0.2.0

@@ -29,14 +29,12 @@ jobs:
       
     - name: policy-reports-admin
       uses: grafana/k6-action@v0.2.0
-      continue-on-error: true
       with:
         filename: ./tests/npm/policy-reports-test.js
         flags: $K6_NPM_ADMIN_FLAGS
         
     - name: policy-report-admin
       uses: grafana/k6-action@v0.2.0
-      continue-on-error: true
       with:
         filename: ./tests/npm/policy-report-test.js
         flags: $K6_NPM_ADMIN_FLAGS

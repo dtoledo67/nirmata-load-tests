@@ -11,13 +11,19 @@ env:
   NIRMATA_NDP_DEVOPS_TOKEN: ${{ secrets.NDP_DEVOPS_TOKEN }}
   K6_VUS: 10
   K6_DURATION: 15s
-  K6_NPM_ADMIN_FLAGS: --env NIRMATA_API_TOKEN=${{ env.NIRMATA_NPM_ADMIN_TOKEN }} --vus 10 --duration 15s
 
 jobs:
   k6_load_test:
     name: Nirmata K6 Load Tests
     runs-on: ubuntu-latest
     steps:
+    - name: set addititonal environment variables
+      run: |
+         echo "K6_NPM_ADMIN_FLAGS= --env NIRMATA_API_TOKEN=$NIRMATA_NPM_ADMIN_TOKEN --vus $K6_VUS --duration $K6_DURATION" >> $GITHUB_ENV
+         echo "K6_NPM_DEVOPS_FLAGS= --env NIRMATA_API_TOKEN=$NIRMATA_NPM_DEVOPS_TOKEN --vus $K6_VUS --duration $K6_DURATION" >> $GITHUB_ENV
+         echo "K6_NDP_ADMIN_FLAGS= --env NIRMATA_API_TOKEN=$NIRMATA_NDP_ADMIN_TOKEN --vus $K6_VUS --duration $K6_DURATION" >> $GITHUB_ENV
+         echo "K6_NDP_DEVOPS_FLAGS= --env NIRMATA_API_TOKEN=$NIRMATA_NDP_DEVOPS_TOKEN --vus $K6_VUS --duration $K6_DURATION" >> $GITHUB_ENV
+         
     - name: Checkout
       uses: actions/checkout@v1
       
